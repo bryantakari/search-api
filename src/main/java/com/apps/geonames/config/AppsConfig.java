@@ -21,7 +21,7 @@ public class AppsConfig {
     @Bean
     public DataSource dataSource(){
         HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl("jdbc:postgresql://172.17.112.116:5432/geonamesdb");
+        dataSource.setJdbcUrl("jdbc:postgresql://localhost:5432/geonamesdb");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         dataSource.setMaximumPoolSize(15);
