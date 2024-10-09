@@ -42,7 +42,8 @@ WITH (FORMAT csv, DELIMITER E'\t', HEADER true);
 ### Requirement
 Requirement: Postgresql and java 17
 
-Run this application after change the jdbc url in assets/config.properties
+Run this application after change the jdbc url in **assets/config.properties**
+
 Remember to run using -Xmx2048m to make sure there is no out of memory
 ![img.png](img.png)
 
