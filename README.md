@@ -5,8 +5,10 @@
 
 ## Base URL
 ### Localhost
-Requirement: [Docker]
-Run this application after change the jdbc url in AppConfig.class
+Requirement: Postgresql and java 17
+
+Run this application after change the jdbc url in assets/config.properties
+![img.png](img.png)
 ```
 localhost:8080/suggestions?q=Austin&longitude=34.052235&latitude=-74.005974&strategy=DescendingStrategy
 ```
@@ -21,6 +23,7 @@ latitude : double data type for latitude
 strategy : Available Strategy Right now : [AscendingStrategy | DescendingStrategy]
 
 Please use DescendingStrategy for the question requirement precision
+### Migrations
 
 Table look like this
 ```
@@ -50,4 +53,8 @@ COPY geonames
 FROM '/docker-entrypoint-initdb.d/US.csv'
 WITH (FORMAT csv, DELIMITER E'\t', HEADER true);
 ```
-Download the US.zip and change the .txt into csv for import data
+
+
+Download the US.zip and change the .txt into csv for import data using query
+
+![img.png](img.png)

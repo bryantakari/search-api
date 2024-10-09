@@ -12,18 +12,41 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import javax.sql.DataSource;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
 public class AppsConfig {
-
+    @Bean("extProp")
+    public Properties load(){
+        try{
+            File defaultProperties = new File("assets/config.properties");
+            InputStream inputStream;
+            if (defaultProperties.exists()){
+                inputStream = new FileInputStream(defaultProperties);
+            }else{
+                //for production location;
+                inputStream = new FileInputStream("/apps/config.properties");
+            }
+            Properties prop = new Properties();
+            prop.load(inputStream);
+            return prop;
+        }catch (IOException e){
+            e.printStackTrace();
+            System.out.println("Failed to fetch external properties");
+            return null;
+        }
+    }
 
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource(Properties extProp){
         HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl("jdbc:postgresql://localhost:5432/geonamesdb");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setJdbcUrl(extProp.getProperty("JDBC_URL"));
+        dataSource.setUsername(extProp.getProperty("JDBC_USERNAME"));
+        dataSource.setPassword(extProp.getProperty("JDBC_PASSWORD"));
         dataSource.setMaximumPoolSize(15);
         return dataSource;
     }
