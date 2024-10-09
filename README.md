@@ -3,27 +3,12 @@
 
 # Geonames API Documentation
 
-## Base URL
-### Localhost
-Requirement: Postgresql and java 17
-
-Run this application after change the jdbc url in assets/config.properties
-![img.png](img.png)
-```
-localhost:8080/suggestions?q=Austin&longitude=34.052235&latitude=-74.005974&strategy=DescendingStrategy
-```
-
-Request:
-q : partial query name
-
-longitude : double data type for longitude
-
-latitude : double data type for latitude
-
-strategy : Available Strategy Right now : [AscendingStrategy | DescendingStrategy]
-
-Please use DescendingStrategy for the question requirement precision
+## Localhost
 ### Migrations
+
+Source: [GeoNames dump](http://download.geonames.org/export/dump/)
+Download the US.zip and change the .txt into csv for import data using query
+![img_1.png](img_1.png)
 
 Table look like this
 ```
@@ -54,7 +39,28 @@ FROM '/docker-entrypoint-initdb.d/US.csv'
 WITH (FORMAT csv, DELIMITER E'\t', HEADER true);
 ```
 
+### Requirement
+Requirement: Postgresql and java 17
 
-Download the US.zip and change the .txt into csv for import data using query
-
+Run this application after change the jdbc url in assets/config.properties
+Remember to run using -Xmx2048m to make sure there is no out of memory
 ![img.png](img.png)
+
+### API Sample
+```
+localhost:8080/suggestions?q=Austin&longitude=34.052235&latitude=-74.005974&strategy=DescendingStrategy
+```
+
+### Request
+q : partial query name
+
+longitude : double data type for longitude
+
+latitude : double data type for latitude
+
+strategy : Available Strategy Right now : [AscendingStrategy | DescendingStrategy]
+
+Please use DescendingStrategy for the question requirement precision
+
+
+
