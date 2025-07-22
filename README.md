@@ -2,7 +2,7 @@
 
 
 # Geonames API Documentation
-
+Note: This repository is to show case design pattern and clean code in java, not for the real case.  Better use elasticsearch for the search for better search data in real case.
 ## Localhost
 ### Migrations
 
